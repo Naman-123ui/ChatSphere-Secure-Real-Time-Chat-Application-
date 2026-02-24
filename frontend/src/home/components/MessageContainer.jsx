@@ -53,7 +53,6 @@ const MessageContainer = ({ onBackUser }) => {
 
         if (selectedConversation?._id) getMessages();
     }, [selectedConversation?._id, setMessage])
-    console.log(messages);
 
     const handelMessages=(e)=>{
         setSendData(e.target.value)

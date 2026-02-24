@@ -5,7 +5,6 @@ import jwtToken from '../utils/jwtwebToken.js'
 export const userRegister = async (req, res) => {
     try {
         const { fullname, username, email, gender, password, profilepic } = req.body;
-        console.log(req.body);
         const user = await User.findOne({ username, email });
         if (user) return res.status(500).send({ success: false, message: " UserName or Email Already Exist " });
         const hashPassword = bcryptjs.hashSync(password, 10);

@@ -15,7 +15,6 @@ const Register = () => {
             ...inputData , [e.target.id]:e.target.value
         })
     }
-console.log(inputData);
     const selectGender=(selectGender)=>{
         setInputData((prev)=>({
             ...prev , gender:selectGender === inputData.gender ? '' : selectGender
