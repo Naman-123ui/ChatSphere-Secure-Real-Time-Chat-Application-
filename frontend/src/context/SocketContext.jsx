@@ -14,7 +14,8 @@ export const SocketContextProvider=({children})=>{
     const {authUser} = useAuth();
     useEffect(()=>{
         if(authUser){
-            const socket = io("https://slrtech-chatapp.onrender.com/",{
+            const socketUrl = process.env.NODE_ENV === 'production' ? window.location.origin : 'http://localhost:3000';
+            const socket = io(socketUrl,{
                 query:{
                     userId:authUser?._id,
                 }
