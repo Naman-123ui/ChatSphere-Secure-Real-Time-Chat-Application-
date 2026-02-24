@@ -13,7 +13,7 @@ const MessageContainer = ({ onBackUser }) => {
     const { authUser } = useAuth();
     const [loading, setLoading] = useState(false);
     const [sending , setSending] = useState(false);
-    const [sendData , setSnedData] = useState("")
+    const [sendData , setSendData] = useState("")
     const lastMessageRef = useRef();
 
     useEffect(()=>{
@@ -37,7 +37,7 @@ const MessageContainer = ({ onBackUser }) => {
             setLoading(true);
             try {
                 const get = await axios.get(`/api/message/${selectedConversation?._id}`);
-                const data = await get.data;
+                const data = get.data;
                 if (data.success === false) {
                     setLoading(false);
                     console.log(data.message);
@@ -56,7 +56,7 @@ const MessageContainer = ({ onBackUser }) => {
     console.log(messages);
 
     const handelMessages=(e)=>{
-        setSnedData(e.target.value)
+        setSendData(e.target.value)
       }
 
     const handelSubmit=async(e)=>{
@@ -64,13 +64,13 @@ const MessageContainer = ({ onBackUser }) => {
         setSending(true);
         try {
             const res =await axios.post(`/api/message/send/${selectedConversation?._id}`,{messages:sendData});
-            const data = await res.data;
+            const data = res.data;
             if (data.success === false) {
                 setSending(false);
                 console.log(data.message);
             }
             setSending(false);
-            setSnedData('')
+            setSendData('')
             setMessage([...messages,data])
         } catch (error) {
             setSending(false);

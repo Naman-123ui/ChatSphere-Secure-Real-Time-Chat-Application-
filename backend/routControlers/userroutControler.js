@@ -7,7 +7,7 @@ export const userRegister = async (req, res) => {
         const { fullname, username, email, gender, password, profilepic } = req.body;
         console.log(req.body);
         const user = await User.findOne({ username, email });
-        if (user) return res.status(500).send({ success: false, message: " UserName or Email Alredy Exist " });
+        if (user) return res.status(500).send({ success: false, message: " UserName or Email Already Exist " });
         const hashPassword = bcryptjs.hashSync(password, 10);
         const profileBoy = profilepic || `https://avatar.iran.liara.run/public/boy?username=${username}`;
         const profileGirl = profilepic || `https://avatar.iran.liara.run/public/girl?username=${username}`;
@@ -25,7 +25,7 @@ export const userRegister = async (req, res) => {
             await newUser.save();
             jwtToken(newUser._id, res)
         } else {
-            res.status(500).send({ success: false, message: "Inavlid User Data" })
+            res.status(500).send({ success: false, message: "Invalid User Data" })
         }
 
         res.status(201).send({
@@ -48,9 +48,9 @@ export const userLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email })
-        if (!user) return res.status(500).send({ success: false, message: "Email Dosen't Exist Register" })
+        if (!user) return res.status(500).send({ success: false, message: "Email Doesn't Exist Register" })
         const comparePasss = bcryptjs.compareSync(password, user.password || "");
-        if (!comparePasss) return res.status(500).send({ success: false, message: "Email Or Password dosen't Matching" })
+        if (!comparePasss) return res.status(500).send({ success: false, message: "Email Or Password Doesn't Match" })
         
         jwtToken(user._id, res);
 
@@ -60,7 +60,7 @@ export const userLogin = async (req, res) => {
             username: user.username,
             profilepic: user.profilepic,
             email:user.email,
-            message: "Succesfully LogIn"
+            message: "Successfully LogIn"
         })
 
     } catch (error) {

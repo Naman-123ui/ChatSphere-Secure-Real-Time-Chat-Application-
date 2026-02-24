@@ -27,7 +27,8 @@ const Login = () => {
             const data = login.data;
             if (data.success === false) {
                 setLoading(false)
-                console.log(data.message);
+                toast.error(data.message);
+                return;
             }
             toast.success(data.message)
             localStorage.setItem('chatapp',JSON.stringify(data));
@@ -41,10 +42,10 @@ const Login = () => {
         }
     }
     return (
-        <div className='flex flex-col items-center justify-center mix-w-full mx-auto'>
+        <div className='flex flex-col items-center justify-center w-full mx-auto'>
             <div className='w-full p-6 rounded-lg shadow-lg
           bg-gray-400 bg-clip-padding
-           backderop-filter backdrop-blur-lg bg-opacity-0'>
+           backdrop-filter backdrop-blur-lg bg-opacity-0'>
                 <h1 className='text-3xl font-bold text-center text-gray-300'>Login
                     <span className='text-gray-950'> Chatters </span>
                     </h1>
@@ -84,7 +85,7 @@ const Login = () => {
                     <div className='pt-2'>
                         <p className='text-sm font-semibold
                          text-gray-800'>
-                            Don't have an Acount ? <Link to={'/register'}>
+                            Don't have an Account ? <Link to={'/register'}>
                                 <span
                                     className='text-gray-950 
                             font-bold underline cursor-pointer

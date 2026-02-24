@@ -25,9 +25,9 @@ console.log(inputData);
     const handelSubmit=async(e)=>{
         e.preventDefault();
         setLoading(true)
-        if(inputData.password !== inputData.confpassword.toLowerCase()){
+        if(inputData.password !== inputData.confpassword){
             setLoading(false)
-            return toast.error("Password Dosen't match")
+            return toast.error("Password Doesn't match")
         }
         try {
             const register = await axios.post(`/api/auth/register`,inputData);
@@ -35,7 +35,7 @@ console.log(inputData);
             if(data.success === false){
                 setLoading(false)
                 toast.error(data.message)
-                console.log(data.message);
+                return;
             }
             toast.success(data?.message)
             localStorage.setItem('chatapp',JSON.stringify(data))
@@ -50,10 +50,10 @@ console.log(inputData);
     }
 
   return (
-    <div className='flex flex-col items-center justify-center mix-w-full mx-auto'>
+    <div className='flex flex-col items-center justify-center w-full mx-auto'>
             <div className='w-full p-6 rounded-lg shadow-lg
           bg-gray-400 bg-clip-padding
-           backderop-filter backdrop-blur-lg bg-opacity-0'>
+           backdrop-filter backdrop-blur-lg bg-opacity-0'>
   <h1 className='text-3xl font-bold text-center text-gray-300'>Register
                     <span className='text-gray-950'> Chatters </span>
                     </h1>
@@ -112,7 +112,7 @@ console.log(inputData);
                             </label>
                             <input
                                 id='confpassword'
-                                type='text'
+                                type='password'
                                 onChange={handelInput}
                                 placeholder='Enter Confirm password'
                                 required
@@ -151,7 +151,7 @@ console.log(inputData);
                     <div className='pt-2'>
                         <p className='text-sm font-semibold
                          text-gray-800'>
-                            Dont have an Acount ? <Link to={'/login'}>
+                            Don't have an Account ? <Link to={'/login'}>
                                 <span
                                     className='text-gray-950 
                             font-bold underline cursor-pointer

@@ -12,19 +12,19 @@ const io = new Server(server,{
     }
 });
 
-export const getReciverSocketId = (receverId)=>{
-    return userSocketmap[receverId];
+export const getReciverSocketId = (reciverId)=>{
+    return userSocketmap[reciverId];
 };
 
 const userSocketmap={}; //{userId,socketId}
 io.on('connection',(socket)=>{
     const userId = socket.handshake.query.userId;
 
-    if(userId !== "undefine") userSocketmap[userId] = socket.id;
+    if(userId !== "undefined") userSocketmap[userId] = socket.id;
     io.emit("getOnlineUsers",Object.keys(userSocketmap))
 
     socket.on('disconnect',()=>{
-        delete userSocketmap[userId],
+        delete userSocketmap[userId];
         io.emit('getOnlineUsers',Object.keys(userSocketmap))
     });
 });
