@@ -52,7 +52,6 @@ MONGODB_CONNECT=<your_mongodb_atlas_connection_string>
 JWT_SECRET=<generate_a_strong_random_string>
 SECURE=production
 NODE_ENV=production
-FRONTEND_URL=https://<your-render-domain>.onrender.com
 ```
 
 **How to generate a strong JWT_SECRET:**
@@ -98,7 +97,6 @@ openssl rand -hex 32
 | `PORT` | Server port (Render sets this) | `3000` |
 | `NODE_ENV` | Environment mode | `production` |
 | `SECURE` | Security mode | `production` |
-| `FRONTEND_URL` | Frontend URL for Socket.io CORS | `https://app.onrender.com` |
 
 ### Troubleshooting
 
@@ -110,9 +108,9 @@ openssl rand -hex 32
 
 #### Issue: Socket.io connection fails
 **Solution:**
-- Verify `FRONTEND_URL` environment variable is set
-- Check that the URL matches your actual Render domain
-- Ensure Socket.io CORS is properly configured
+- Check Render logs for Socket.io errors
+- Verify that Socket.io is connecting from the same domain
+- Clear browser cache and try again
 
 #### Issue: Database connection error
 **Solution:**

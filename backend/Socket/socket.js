@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server,{
     cors:{
-        origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : '*',
+        origin: "*",  // Frontend and backend are same-origin in production
         methods:["GET","POST"]
     }
 });
