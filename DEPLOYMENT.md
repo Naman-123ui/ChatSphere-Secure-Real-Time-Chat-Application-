@@ -39,7 +39,7 @@ git push origin main
 | Environment | `Node` |
 | Region | Select closest to your users |
 | Branch | `main` |
-| Build Command | `npm install && npm install --prefix frontend && npm run build --prefix frontend` |
+| Build Command | `npm install && npm install --include=dev --prefix frontend && npm run build --prefix frontend` |
 | Start Command | `node backend/index.js` |
 
 ### Step 4: Add Environment Variables
@@ -123,6 +123,15 @@ openssl rand -hex 32
 - Check Render logs for deployment errors
 - Verify build command succeeds locally
 - Ensure start command is correct: `node backend/index.js`
+
+#### Issue: "vite: not found" during build
+**Solution:**
+- This happens when devDependencies aren't installed
+- Build command MUST include `--include=dev` flag:
+  ```
+  npm install && npm install --include=dev --prefix frontend && npm run build --prefix frontend
+  ```
+- This is already configured in package.json and render.yaml
 
 ### File Structure Expected
 
